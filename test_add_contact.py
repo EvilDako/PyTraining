@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.support.ui import Select
 import unittest
 from contact import Contact
 
@@ -73,27 +74,6 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("email3").send_keys(contact.email3)
         wd.find_element_by_name("homepage").click()
         wd.find_element_by_name("homepage").send_keys(contact.homepage)
-        # здесь непонятно как параметризировать выбор значений из выпадающего списка
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[1]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[1]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[1]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[1]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[19]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[1]//option[19]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[11]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[11]").click()
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        # год не указываю как параметр, т.к. непонятно как обработать выбор дня и месяца
-        wd.find_element_by_name("byear").send_keys("1987")
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[15]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[3]//option[15]").click()
-        if not wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[12]").is_selected():
-            wd.find_element_by_xpath("//div[@id='content']/form/select[4]//option[12]").click()
-        wd.find_element_by_name("ayear").click()
-        wd.find_element_by_name("ayear").clear()
-        # год не указываю как параметр, т.к. непонятно как обработать выбор дня и месяца
-        wd.find_element_by_name("ayear").send_keys("2000")
         wd.find_element_by_name("address2").click()
         wd.find_element_by_name("address2").clear()
         wd.find_element_by_name("address2").send_keys(contact.address2)
