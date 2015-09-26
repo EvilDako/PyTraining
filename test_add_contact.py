@@ -16,10 +16,13 @@ class test_add_contact(unittest.TestCase):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/index.php")
 
-    def login(self, wd, username, password):
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
@@ -28,7 +31,8 @@ class test_add_contact(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_css_selector("input[type=\"submit\"]").click()
 
-    def contact_creation(self, wd, contact):
+    def contact_creation(self, contact):
+        wd = self.wd
         # init creation new contact
         wd.find_element_by_link_text("add new").click()
         # fill new contact form
@@ -86,17 +90,17 @@ class test_add_contact(unittest.TestCase):
         # submit creation new contact
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
     def test_add_contact(self):
         wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, username="admin", password="secret")
-        self.contact_creation(wd, Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="VANO", title="Sir", company="SUPERCOMPANY", address="Moscow, Old Arbat, 9",
+        self.login(username="admin", password="secret")
+        self.contact_creation(Contact(firstname="Ivan", middlename="Ivanovich", lastname="Ivanov", nickname="VANO", title="Sir", company="SUPERCOMPANY", address="Moscow, Old Arbat, 9",
                               tel_home="495555555", tel_mobile="89009009090", tel_work="495123456", tel_fax="+899999999", email="ivanov@mail.ru", email2="ivan@mail.ru", email3="ivanovich@mail.ru", homepage="www.vanyusha.com",
                               address2="none", phone2="none", notes="many funny comments"))
-        self.logout(wd)
+        self.logout()
 
     def tearDown(self):
         self.wd.quit()
