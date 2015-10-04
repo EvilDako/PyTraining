@@ -12,14 +12,3 @@ def test_add_empty_group(app):
     app.session.login(username="admin", password="secret")
     app.group.create(Group(name="", header="", footer=""))
     app.session.logout()
-
-def test_edit_group(app):
-    app.session.login(username="admin", password="secret")
-    app.group.edit(Group(name="new_name", header="new_header", footer="new_footer"))
-    app.session.logout()
-
-
-def test_delete_first_group(app):
-    app.session.login(username="admin", password="secret")
-    app.group.delete()
-    app.session.logout()
