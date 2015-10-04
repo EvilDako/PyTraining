@@ -71,8 +71,7 @@ class ContactHelper:
         wd = self.app.wd
         # open contacts list
         wd.find_element_by_link_text("home").click()
-        # select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         # press edit button
         wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
         # modify contact information
@@ -137,11 +136,14 @@ class ContactHelper:
         wd = self.app.wd
         # open contacts list
         wd.find_element_by_link_text("home").click()
-        # select first contact
-        wd.find_element_by_name("selected[]").click()
+        self.select_first_contact()
         # press delete button
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         # close submit window
         wd.switch_to_alert().accept()
         # return to home page
         wd.find_element_by_link_text("home").click()
+
+    def select_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_name("selected[]").click()
