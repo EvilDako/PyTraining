@@ -91,7 +91,8 @@ class ContactHelper:
 
     def open_contact_list(self):
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        if not (wd.current_url.endswith("/index.php")):
+            wd.find_element_by_link_text("home").click()
 
     def select_first_contact(self):
         wd = self.app.wd
