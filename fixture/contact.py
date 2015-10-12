@@ -40,6 +40,7 @@ class ContactHelper:
         self.change_field_value("homepage", contact.homepage)
         # submit creation new contact
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        self.contact_cache = None
 
 
     #edit contact
@@ -75,6 +76,7 @@ class ContactHelper:
         wd.find_element_by_name("update").click()
         #return to home page
         wd.find_element_by_link_text("home page").click()
+        self.contact_cache = None
 
     #delete contact
     def delete(self):
@@ -88,6 +90,7 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         # return to home page
         self.open_contact_list()
+        self.contact_cache = None
 
     def open_contact_list(self):
         wd = self.app.wd
@@ -103,12 +106,15 @@ class ContactHelper:
         self.open_contact_list()
         return len(wd.find_elements_by_name("selected[]"))
 
+    contact_cache = None
+
     def get_contact_list(self):
-        wd = self.app.wd
-        self.open_contact_list()
-        contacts=[]
-        for element in wd.find_elements_by_name("entry"):
-            text = element.find_element_by_name("selected[]").get_attribute("title")
-            id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(fio=text, id=id))
-        return contacts
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.open_contact_list()
+            self.contact_cache=[]
+            for element in wd.find_elements_by_name("entry"):
+                text = element.find_element_by_name("selected[]").get_attribute("title")
+                id = element.find_element_by_name("selected[]").get_attribute("value")
+                self.contact_cache.append(Contact(fio=text, id=id))
+        return list(self.contact_cache)
