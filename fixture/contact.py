@@ -42,13 +42,14 @@ class ContactHelper:
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
         self.contact_cache = None
 
-
-    #edit contact
     def edit(self, contact):
+        self.edit_contact_by_index(0)
+
+    def edit_contact_by_index(self, index, contact):
         wd = self.app.wd
         # open contacts list
         self.open_contact_list()
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         # press edit button
         wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
         # modify contact information
@@ -78,12 +79,15 @@ class ContactHelper:
         wd.find_element_by_link_text("home page").click()
         self.contact_cache = None
 
+    def delete (self, index):
+        self.delete_contact_by_index(0)
+
     #delete contact
-    def delete(self):
+    def delete_contact_by_index(self, index):
         wd = self.app.wd
         # open contacts list
         self.open_contact_list()
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         # press delete button
         wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
         # close submit window
@@ -96,6 +100,11 @@ class ContactHelper:
         wd = self.app.wd
         if not (wd.current_url.endswith("/index.php")):
             wd.find_element_by_link_text("home").click()
+
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
 
     def select_first_contact(self):
         wd = self.app.wd
