@@ -1,10 +1,10 @@
 __author__ = 'dako'
-
+from sys import maxsize
 
 class Contact:
 
     def __init__(self, firstname=None, middlename=None, lastname=None, nickname=None, title=None, company=None, address=None, tel_home=None,
-                         tel_mobile=None, tel_work=None, tel_fax=None, email=None, email2=None, email3=None, homepage=None, address2=None, phone2=None, notes=None):
+                         tel_mobile=None, tel_work=None, tel_fax=None, email=None, email2=None, email3=None, homepage=None, address2=None, phone2=None, notes=None, id=None, fio=None):
 
         self.firstname = firstname
         self.middlename = middlename
@@ -24,3 +24,17 @@ class Contact:
         self.address2 = address2
         self.phone2 = phone2
         self.notes = notes
+        self.id = id
+        self.fio = fio
+
+    def __repr__(self):
+        return "%s:%s" % (self.id, self.fio)
+
+    def __eq__(self, other):
+        return (self.id is None or other.id is None or self.id == other.id) and (self.fio is None or other.fio is None or self.fio == other.fio)
+
+    def id_or_max(self):
+        if self.id:
+            return int(self.id)
+        else:
+            return maxsize
