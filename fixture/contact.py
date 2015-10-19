@@ -51,7 +51,7 @@ class ContactHelper:
         self.open_contact_list()
         self.select_contact_by_index(index)
         # press edit button
-        wd.find_element_by_css_selector("img[alt=\"Edit\"]").click()
+        wd.find_element_by_css_selector('img[alt="Edit"]').click()
         # modify contact information
         self.change_field_value("firstname", contact.firstname)
         self.change_field_value("middlename", contact.middlename)
