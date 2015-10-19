@@ -123,7 +123,11 @@ class ContactHelper:
             self.open_contact_list()
             self.contact_cache=[]
             for element in wd.find_elements_by_name("entry"):
-                text = element.find_element_by_name("selected[]").get_attribute("title")
+                cells = element.find_elements_by_tag_name("td")
+                lastname = cells[1].text
+                firstname = cells[2].text
+                #тут получал ФИО из атрибута чекбокса
+                #text = element.find_element_by_name("selected[]").get_attribute("title")
                 id = element.find_element_by_name("selected[]").get_attribute("value")
-                self.contact_cache.append(Contact(fio=text, id=id))
+                self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=id))
         return list(self.contact_cache)
