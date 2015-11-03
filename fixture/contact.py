@@ -107,6 +107,20 @@ class ContactHelper:
         self.open_contact_list()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        # open contacts list
+        self.open_contact_list()
+        self.select_contact_by_id(id)
+        # press delete button
+        wd.find_element_by_xpath("//div[@id='content']/form[2]/div[2]/input").click()
+        # close submit window
+        wd.switch_to_alert().accept()
+        # return to home page
+        self.open_contact_list()
+        self.contact_cache = None
+
+
     def open_contact_list(self):
         wd = self.app.wd
         if not (wd.current_url.endswith("/index.php")):
@@ -115,6 +129,10 @@ class ContactHelper:
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_xpath(".//*[@id='%s']" % id).click()
 
     def select_first_contact(self):
         wd = self.app.wd
