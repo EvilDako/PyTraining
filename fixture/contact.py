@@ -76,6 +76,42 @@ class ContactHelper:
         wd.find_element_by_link_text("home page").click()
         self.contact_cache = None
 
+    def edit_contact_by_id(self, id, contact):
+        wd = self.app.wd
+        self.open_contact_to_edit_by_id(id)
+        # modify contact information
+        self.change_field_value("firstname", contact.firstname)
+        self.change_field_value("middlename", contact.middlename)
+        self.change_field_value("lastname", contact.lastname)
+        self.change_field_value("nickname", contact.nickname)
+        self.change_field_value("title", contact.title)
+        self.change_field_value("company", contact.company)
+        self.change_field_value("address", contact.address)
+        self.change_field_value("home", contact.tel_home)
+        self.change_field_value("mobile", contact.tel_mobile)
+        self.change_field_value("work", contact.tel_work)
+        self.change_field_value("fax", contact.tel_fax)
+        self.change_field_value("email", contact.email)
+        self.change_field_value("email2", contact.email2)
+        self.change_field_value("email3", contact.email3)
+        self.change_field_value("homepage", contact.homepage)
+        self.change_field_value("address2", contact.address2)
+        self.change_field_value("phone2", contact.phone2)
+        self.change_field_value("notes", contact.notes)
+        self.change_field_value("homepage", contact.homepage)
+        self.change_field_value("homepage", contact.homepage)
+        #submit updating
+        wd.find_element_by_name("update").click()
+        #return to home page
+        wd.find_element_by_link_text("home page").click()
+        self.contact_cache = None
+
+    def open_contact_to_edit_by_id(self, id):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_xpath(".//*[@href='edit.php?id=%s']" % id).click()
+
+
     def open_contact_to_edit_by_index(self, index):
         wd = self.app.wd
         self.app.open_home_page()
