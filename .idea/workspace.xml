@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="5be811ce-a71c-4a43-980d-fb06b9a41421" name="Default" comment="">
       <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/.name" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/fixture/contact.py" afterPath="$PROJECT_DIR$/fixture/contact.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PyTraining.iws" />
     <ignored path=".idea/workspace.xml" />
