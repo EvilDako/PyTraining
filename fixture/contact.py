@@ -179,6 +179,23 @@ class ContactHelper:
         self.open_contact_list()
         return len(wd.find_elements_by_name("selected[]"))
 
+    def add_to_group(self, group):
+        wd = self.app.wd
+        wd.find_element_by_name("to_group").click()
+        wd.find_element_by_xpath(".//*[@id='content']/form[2]/div[4]/select/option[text()='%s'][1]" % group).click()
+        wd.find_element_by_name("add").click()
+
+    def delete_from_group(self):
+        pass
+
+    def check_contact_in_group(self, group):
+        pass
+        """
+        проверить в выбранной группе наличие контакта по id
+        """
+
+
+
     contact_cache = None
 
     def get_contact_list(self):
@@ -225,3 +242,7 @@ class ContactHelper:
         tel_mobile = re.search("M: (.*)", text).group(1)
         phone2 = re.search("P: (.*)", text).group(1)
         return Contact(tel_home=tel_home, tel_work=tel_work, tel_mobile=tel_mobile, phone2=phone2)
+
+    def get_group_list_from_contact_page(self):
+        wd = self.app.wd
+        l = wd.find_elements_by_name
